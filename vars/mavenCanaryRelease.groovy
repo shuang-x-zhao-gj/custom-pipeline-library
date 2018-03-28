@@ -14,7 +14,7 @@ def call(body) {
     String mvnprof = "${config.mvnprofile}"
     if (mvnprof) {
       sh "mvn clean -e -U -P${config.mvnprofile} deploy"
-    else {
+    } else {
       sh "mvn clean -e -U deploy"
     }
 
