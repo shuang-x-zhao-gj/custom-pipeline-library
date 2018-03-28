@@ -8,6 +8,7 @@ def call(body) {
 
     def flow = new io.fabric8.Fabric8Commands()
 
+    sh "echo +++DEBUGGING+++ MVN profile is ${config.mvnprofile}"
     sh "git checkout -b ${env.JOB_NAME}-${config.version}"
     sh "mvn org.codehaus.mojo:versions-maven-plugin:2.2:set -U -DnewVersion=${config.version}"
     sh "mvn clean -e -U deploy"
