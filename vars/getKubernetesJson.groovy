@@ -74,7 +74,7 @@ def deployment = """
       group: quickstart
     name: ${env.JOB_NAME}
   spec:
-    replicas: 1
+    replicas: ${config.replicas}
     selector:
       matchLabels:
         provider: fabric8
