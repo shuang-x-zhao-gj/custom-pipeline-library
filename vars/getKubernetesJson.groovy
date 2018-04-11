@@ -17,6 +17,7 @@ def call(body) {
     def requestMemory = config.resourceRequestMemory ?: '0'
     def limitCPU = config.resourceLimitMemory ?: '0'
     def limitMemory = config.resourceLimitMemory ?: '0'
+    def replicas = config.replicas ?: '1'
     def yaml
 
     def isSha = ''
@@ -74,7 +75,7 @@ def deployment = """
       group: quickstart
     name: ${env.JOB_NAME}
   spec:
-    replicas: ${config.replicas}
+    replicas: ${replicas}
     selector:
       matchLabels:
         provider: fabric8
