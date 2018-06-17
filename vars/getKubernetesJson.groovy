@@ -48,7 +48,7 @@ def service = """
       provider: fabric8
       project: ${env.JOB_NAME}
       expose: '${expose}'
-      version: ${config.version}
+      version: "${config.version}"
       group: quickstart
     name: ${env.JOB_NAME}
   spec:
@@ -71,7 +71,7 @@ def deployment = """
     labels:
       provider: fabric8
       project: ${env.JOB_NAME}
-      version: ${config.version}
+      version: "${config.version}"
       group: quickstart
     name: ${env.JOB_NAME}
   spec:
@@ -86,7 +86,7 @@ def deployment = """
         labels:
           provider: fabric8
           project: ${env.JOB_NAME}
-          version: ${config.version}
+          version: "${config.version}"
           group: quickstart
       spec:
         containers:
