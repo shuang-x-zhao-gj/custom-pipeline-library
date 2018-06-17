@@ -25,10 +25,10 @@ def call(body) {
         isSha = utils.getImageStreamSha(env.JOB_NAME)
     }
 
-    def fabric8Registry = ''
-    if (env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST){
-        fabric8Registry = env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST+':'+env.FABRIC8_DOCKER_REGISTRY_SERVICE_PORT+'/'
-    }
+    def fabric8Registry = config.privateRegistry ?: env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST+':'+env.FABRIC8_DOCKER_REGISTRY_SERVICE_PORT+'/'
+    //if (env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST){
+    //    fabric8Registry = env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST+':'+env.FABRIC8_DOCKER_REGISTRY_SERVICE_PORT+'/'
+    //}
 
     def sha
     def list = """
