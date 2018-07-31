@@ -34,7 +34,7 @@ def call(Map parameters = [:], body) {
                 containers: [
                         [name: 'maven', image: "${mavenImage}", command: 'cat', ttyEnabled: true,
                          envVars: [
-                                 containerEnvVar(key: 'MAVEN_OPTS', value: '-Duser.home=/root/')]],
+                                 envVar(key: 'MAVEN_OPTS', value: '-Duser.home=/root/')]],
                         [name: 'clients', image: "${clientsImage}", command: 'cat', ttyEnabled: true, privileged: true]],
                 volumes: [secretVolume(secretName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
                           persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/root/.mvnrepo'),
@@ -44,7 +44,7 @@ def call(Map parameters = [:], body) {
                           secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
                           secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git'),
                           hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')],
-                envVars: [[key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'], [key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/']]
+                envVars: [envVar(key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'), envVar(key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/')]
         ) {
 
             body(
