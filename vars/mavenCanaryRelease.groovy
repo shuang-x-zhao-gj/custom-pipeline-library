@@ -39,7 +39,8 @@ def call(body) {
     } else {
       if (!s2iMode) {
         retry(3){
-          sh "mvn fabric8:push -Ddocker.push.registry=${privateRegistry}"
+          //sh "mvn fabric8:push -Ddocker.push.registry=${privateRegistry}"
+          sh "mvn dockerfile:push"
         }
       }
     }
