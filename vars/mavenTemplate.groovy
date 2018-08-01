@@ -43,6 +43,7 @@ def call(Map parameters = [:], body) {
                           secretVolume(secretName: 'jenkins-hub-api-token', mountPath: '/home/jenkins/.apitoken'),
                           //secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
                           persistentVolumeClaim(claimName: 'git-ssh-key', mountPath: '/root/.ssh', readOnly: true),
+                          persistentVolumeClaim(claimName: 'docker-config', mountPath: '/home/jenkins/.docker', readOnly: true),
                           secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git'),
                           hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')],
                 envVars: [[key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'], [key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/']]
