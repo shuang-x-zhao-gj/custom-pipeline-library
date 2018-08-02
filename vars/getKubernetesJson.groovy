@@ -108,6 +108,8 @@ def deployment = """
             requests:
               cpu: ${limitCPU}
               memory: ${limitMemory}
+        imagePullSecrets:
+        - name: registry-key-secret-1
         terminationGracePeriodSeconds: 2
 """
 
