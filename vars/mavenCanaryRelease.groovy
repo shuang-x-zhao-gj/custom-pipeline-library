@@ -21,11 +21,6 @@ def call(body) {
     def s2iMode = flow.isOpenShiftS2I()
     echo "s2i mode: ${s2iMode}"
 
-    def privateRegistry = "${config.privateRegistry}"
-    if (!privateRegistry) {
-        privateRegistry = "${env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST}:${env.FABRIC8_DOCKER_REGISTRY_SERVICE_PORT}"
-    }
-
     if (flow.isSingleNode()){
         echo 'Running on a single node, skipping docker push as not needed'
         def m = readMavenPom file: 'pom.xml'
