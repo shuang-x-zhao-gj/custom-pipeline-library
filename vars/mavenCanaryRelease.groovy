@@ -13,7 +13,7 @@ def call(body) {
 
     String mvnprof = "${config.mvnprofile}"
     if (mvnprof) {
-      sh "DOCKER_HOST=unix:///var/run/docker.sock mvn clean -e -U -P${config.mvnprofile} deploy"
+      sh "mvn clean -e -U -P${config.mvnprofile} deploy"
     } else {
       sh "mvn clean -e -U deploy"
     }

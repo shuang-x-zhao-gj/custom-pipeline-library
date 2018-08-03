@@ -47,7 +47,7 @@ def call(Map parameters = [:], body) {
                           persistentVolumeClaim(claimName: 'docker-config', mountPath: '/home/jenkins/.docker', readOnly: true),
                           secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git'),
                           hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')],
-                envVars: [envVar(key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'), envVar(key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/')]
+                envVars: [envVar(key: 'DOCKER_HOST', value: 'unix:///var/run/docker.sock'), envVar(key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/')]
         ) {
 
             body(
