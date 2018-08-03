@@ -33,9 +33,10 @@ def call(body) {
        }
     } else {
       if (!s2iMode) {
-        retry(3){
-          sh "mvn fabric8:push -Ddocker.push.registry=${env.FABRIC8_DOCKER_REGISTRY_SERVICE_HOST}:${env.FABRIC8_DOCKER_REGISTRY_SERVICE_PORT}"
-        }
+        //retry(3){
+          //sh "mvn fabric8:push -Ddocker.push.registry=${privateRegistry}"
+        //  sh "mvn dockerfile:push -Ddockerfile.username=devops -Ddockerfile.password=DevOps_001# -P${config.mvnprofile}"
+        //}
       }
     }
 

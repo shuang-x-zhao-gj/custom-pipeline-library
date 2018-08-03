@@ -22,7 +22,7 @@ def call(Map parameters = [:], body) {
                           persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/root/.mvnrepo'),
                           secretVolume(secretName: 'jenkins-release-gpg', mountPath: '/home/jenkins/.gnupg'),
                           secretVolume(secretName: 'jenkins-hub-api-token', mountPath: '/home/jenkins/.apitoken'),
-                          secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
+                          //secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
                           secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git')]) {
 
             body(
@@ -36,12 +36,15 @@ def call(Map parameters = [:], body) {
                          envVars: [
                                  envVar(key: 'MAVEN_OPTS', value: '-Duser.home=/root/')]],
                         [name: 'clients', image: "${clientsImage}", command: 'cat', ttyEnabled: true, privileged: true]],
-                volumes: [secretVolume(secretName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
+                volumes: [//secretVolume(secretName: 'jenkins-maven-settings', mountPath: '/root/.m2'),
                           persistentVolumeClaim(claimName: 'jenkins-mvn-local-repo', mountPath: '/root/.mvnrepo'),
-                          secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'),
+                          //secretVolume(secretName: 'jenkins-docker-cfg', mountPath: '/home/jenkins/.docker'),
                           secretVolume(secretName: 'jenkins-release-gpg', mountPath: '/home/jenkins/.gnupg'),
                           secretVolume(secretName: 'jenkins-hub-api-token', mountPath: '/home/jenkins/.apitoken'),
-                          secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
+                          //secretVolume(secretName: 'jenkins-ssh-config', mountPath: '/root/.ssh'),
+                          persistentVolumeClaim(claimName: 'maven-security', mountPath: '/root/.m2', readOnly: true),
+                          persistentVolumeClaim(claimName: 'git-ssh-key', mountPath: '/root/.ssh', readOnly: true),
+                          persistentVolumeClaim(claimName: 'docker-config', mountPath: '/home/jenkins/.docker', readOnly: true),
                           secretVolume(secretName: 'jenkins-git-ssh', mountPath: '/root/.ssh-git'),
                           hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')],
                 envVars: [envVar(key: 'DOCKER_HOST', value: 'unix:/var/run/docker.sock'), envVar(key: 'DOCKER_CONFIG', value: '/home/jenkins/.docker/')]
