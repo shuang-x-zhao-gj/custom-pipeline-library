@@ -4,7 +4,7 @@ def call(Map parameters = [:], body) {
     def defaultLabel = "clients.${env.JOB_NAME}.${env.BUILD_NUMBER}".replace('-', '_').replace('/', '_')
     def label = parameters.get('label', defaultLabel)
 
-    def clientsImage = parameters.get('clientsImage', 'docker-repo.gaojihealth.cn:80/service-base-image/jenkins-slave-nodejs-mobile:v2')
+    def clientsImage = parameters.get('clientsImage', 'docker-repo.gaojihealth.cn:80/service-base-image/jenkins-slave-nodejs:v2')
     def inheritFrom = parameters.get('inheritFrom', 'base')
 
     def flow = new io.fabric8.Fabric8Commands()
